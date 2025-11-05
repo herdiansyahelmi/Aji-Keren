@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video & YouTube Live Stream App</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; }
+        .section { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .section h3 { margin-top: 0; color: #333; }
+        input, button { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+        button { background: #007cba; color: white; border: none; cursor: pointer; }
+        button:hover { background: #005a87; }
+        .clear-btn { background: #666; }
+        .clear-btn:hover { background: #444; }
+        #result { margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; display: none; }
+    </style>
+</head>
+<body>
+    <h1>Video & YouTube Live Stream App</h1>
+    
+    <div class="section">
+        <h3>Upload Video</h3>
+        <input type="file" id="videoFile" accept="video/*">
+    </div>
+    
+    <div class="section">
+        <h3>YouTube Live Stream</h3>
+        <input type="url" id="youtubeUrl" placeholder="YouTube Live URL">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+    </div>
+    
+    <button onclick="submitData()">Submit</button>
+    <button class="clear-btn" onclick="clearFields()">Clear</button>
+    
+    <div id="result"></div>
+
+    <script>
+        function submitData() {
+            const video = document.getElementById('videoFile').files[0];
+            const url = document.getElementById('youtubeUrl').value;
+            const user = document.getElementById('username').value;
+            const pwd = document.getElementById('password').value;
+            
+            if (!video && !url) {
+                alert('Please upload a video or enter YouTube URL');
+                return;
+            }
+            
+            let message = 'Data submitted:<br>';
+            if (video) message += `Video: ${video.name}<br>`;
+            if (url) message += `YouTube URL: ${url}<br>`;
+            if (user) message += `Username: ${user}<br>`;
+            if (pwd) message += 'Password: [Hidden]<br>';
+            
+            document.getElementById('result').innerHTML = message;
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        function clearFields() {
+            document.getElementById('videoFile').value = '';
+            document.getElementById('youtubeUrl').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
